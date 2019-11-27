@@ -1,6 +1,9 @@
 from tkinter import *
 from main import passes
 
+##Fix wimpy az generation! Az is the first line available in the wimpy for cda
+##Fix parsing of wimpys after the window is loaded
+
 
 window = Tk()
 window.title("Wimpy Searcher")
