@@ -30,6 +30,7 @@ for i in range(1,4):
         else:
             if len(lines[x]) > 1:
                 del lines[x][1] 
+            StringLineBefore = split(str(lines[x-1]))
             StringLine = split(str(l))
             orbit = ''
             for o in range(23,29):
@@ -40,14 +41,19 @@ for i in range(1,4):
                 time = time + StringLine[t]
             
             Az = ''
-            for a in range(32,35):
-                Az = Az + StringLine[a]
-
-            if StringLine[39] == 'a' and (StringLine[40] == '1' or StringLine[40] == '2'):
+            if '*' in StringLine[0:40] and '*' not in StringLineBefore[0:40] and 'l' not in StringLineBefore[0:40]: 
+                for a in range(32,35):
+                    Az = Az + StringLine[a]
+                # print(wimpy_name)
+                # print("Before: ",StringLineBefore[0:40])
+                # print("After: ",StringLine[0:40])
                 Az = int(Az)
                 if Az > 260:
                     Az = Az - 360
                 passes[i-1]["M0{1}-{0}-Az".format(orbit,i)] = str(Az)
+
+            if StringLine[39] == 'a' and (StringLine[40] == '1' or StringLine[40] == '2'):
+
                 passes[i-1]["M0{1}-{0}-AOS".format(orbit,i)] = time
             elif StringLine[39] == 'A':
                 passes[i-1]["M0{1}-{0}-AOS5".format(orbit,i)] = time
